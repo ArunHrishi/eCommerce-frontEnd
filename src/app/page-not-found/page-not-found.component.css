@@ -1,0 +1,80 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+.main{
+  width: 100%;
+  /* height: 750px; */
+  /* background-image: url('https://wallpaper.dog/large/17271787.jpg'); */
+  background-image: url('https://wallpapercave.com/wp/wp9267865.jpg');
+  /* background-image: url('https://images.hdqwalls.com/wallpapers/rogue-one-darth-vader-4k-gz.jpg'); */
+  /* background-color: black; */
+  /* background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d6/WarpTrails001.gif'); */
+  background-size: cover;
+  background-position: center;
+  /* padding-bottom: 55px; */
+}
+
+.translucent{
+  width: 100%;
+  height: inherit;
+  background-color: rgb(0, 0, 0,0.3);
+  padding-bottom: 55px;
+}
+header p mat-toolbar{
+  background-color: rgb(0, 0, 0,0.0);
+}
+.logo{
+  font-family: 'Rubik Iso', cursive;
+  font-size: 27px;
+}
+.not-found h1{
+  font-family: 'Rubik Iso', cursive;
+  font-size: 47px;
+  font-weight: bold;
+}
+.not-found h2{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+}
+.go-home h2{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+}
+.content{
+  width: 100%;
+  /* height: 100%; */
+  /* background-color: rgb(0, 0, 0,0.3); */
+  /* padding-bottom: 55px; */
+}
+.time{
+  margin: auto;
+}
+.row a{
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 900;
+}
+
+/* media query */
+@media screen and ( max-width: 420px) {
+  .main{
+    /* background-size: auto; */
+  }
+  .btn1,.btn2{
+    width: 100%;
+    display: block;
+  }
+  .buttons{
+    text-align: center;
+    /* padding-bottom: 20px; */
+  }
+  .translucent{
+    padding-bottom: 30px;
+  }
+  .space{
+    padding-top: 130px;
+  }
+}

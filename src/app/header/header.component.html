@@ -1,0 +1,29 @@
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="container px-4 px-lg-5">
+      <a class="navbar-brand text-light" routerLink=""><i class="fa-solid fa-cart-shopping fa-beat me-2 text-warning"></i> E-Cart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li class="nav-item">
+                <!-- search box -->
+                <input (keyup)="search($event)" type="text" style="width:400px;" class="form-control" placeholder="Search Product Here ...">
+              </li>
+
+          </ul>
+          <form class="d-flex align-items-center">
+              <!-- wishlist -->
+              <a class="btn me-3 text-light" routerLink="products/wishlist">
+                  <i class="fa-solid fa-heart fa-beat text-danger me-1"></i>
+                  Wishlist
+              </a>
+              <!-- cart -->
+              <a class="btn text-light" routerLink="products/cart">
+                <i class="fa-solid fa-cart-plus fa-shake text-dark me-1"></i>
+                Cart
+                <span class="badge bg-warning text-dark ms-1 rounded-pill">{{cartItems}}</span>
+            </a>
+          </form>
+      </div>
+  </div>
+</nav>

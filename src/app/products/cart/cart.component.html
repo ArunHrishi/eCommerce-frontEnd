@@ -1,0 +1,158 @@
+<!-- empty cart -->
+<div *ngIf="allProducts.length==0" class="empty text-center my-5 py-5">
+  <img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="empty" class="img-fluid"><br>
+  <h3 class="text-danger mt-3">Your cart is empty!!!</h3>
+  <a routerLink="" class="btn btn-success my-3">Go Shopping ⇶</a>
+</div>
+
+<!-- cart design -->
+<div *ngIf="allProducts.length!=0" class="container my-5 py-5 cart">
+  <h2 class="text-success text-decoration-underline mt-5 pt-1">Cart Summary</h2>
+  <div class="row  my-5">
+    <!-- table -->
+    <div class="col-md-7 border p-3 rounded">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of allProducts; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{product.title}}</td>
+            <td>
+              <img width="54px" height="60px" [src]="product.image" [alt]="product.title">
+            </td>
+            <td>
+              <div class="d-flex">
+                <!-- decrement quantity -->
+                <button (click)="decrement(product.id)" class="btn text-danger fw-bolder" style="font-size: larger;">-</button>
+                <!-- quantity box -->
+                <input type="num" class="form-control text-center me-1 ms-1" id="inputQuantity"
+                [value]="product.quantity" style="max-width: 3rem;" readonly>
+                <!-- increment quantity -->
+                <button (click)="increment(product.id)" class="btn text-success fw-bolder" style="font-size: larger;">+</button>
+              </div>
+            </td>
+            <td>${{product.grandTotal}}</td>
+            <td>
+              <i (click)="removeItem(product.id)" class="fa-solid fa-trash icon text-danger"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- more actions -->
+      <div class="d-flex justify-content-end">
+        <!-- empty cart -->
+        <button (click)="emptyCart()" class="btn btn-outline-danger me-4">
+          <i class="fa-solid fa-trash fa-bounce"></i>
+          Empty Cart
+        </button>
+        <!-- shop more -->
+        <a class="btn btn-outline-success" routerLink="">
+          <i class="fa-solid fa-cart-plus fa-beat-fade"></i>
+           Shop More ⇢
+          </a>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <!-- summary -->
+    <div class="col-md-4 my-4">
+      <div class="border rounded p-3">
+        <h4 class="">Price: <span class="text-danger"> ${{cartTotalPrice}}</span></h4>
+        <hr>
+        <!-- button check out -->
+        <div class="d-grid">
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check Out</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 text-primary" id="staticBackdropLabel">Check Out Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h6 *ngIf="proceedToPaymentBtnClickedStatus" class="text-success">Payment Details</h6>
+                <h6 *ngIf="!proceedToPaymentBtnClickedStatus" class="text-success">Enter Your Delivery Address</h6>
+                <form *ngIf="!proceedToPaymentBtnClickedStatus" [formGroup]="addressForm" class="border rounded p-3" (ngSubmit)="submitBtnClicked()">
+                  <div class="form-floating mb-3">
+                    <input name="username" formControlName="username" type="text" class="form-control" id="floatingName" placeholder="username" required>
+                    <label for="floatingName">Username</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="flat" formControlName="flat" type="text" class="form-control" id="floatingFlat" placeholder="Apartment/Flat No." required>
+                    <label for="floatingFlat">Apartment/Flat No.</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="street" formControlName="street" type="text" class="form-control" id="floatingStreet" placeholder="Street" required>
+                    <label for="floatingStreet">Street</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input name="state" formControlName="state" type="text" class="form-control" id="floatingState" placeholder="State" required>
+                    <label for="floatingState">State</label>
+                  </div>
+                  <!-- submit button -->
+                  <div class="">
+                    <input class="btn btn-warning text-light" type="submit" value="Proceed To Payment">
+                  </div>
+                </form>
+                <!-- delivery address -->
+                <div *ngIf="proceedToPaymentBtnClickedStatus" class="mt-3 border rounded p-2">
+                  <h6 class="fw-bolder text-primary">Delivery Address:</h6>
+                  <p>{{username}}</p>
+                  <p>{{flat}},{{street}}</p>
+                  <p>{{state}}</p>
+                </div>
+              </div>
+              <!-- total and offer section -->
+              <div class="modal-footer d-flex justify-content-between">
+                <h6>Total Amount: <span class="text-danger fw-bolder" style="font-size: larger;">${{cartTotalPrice}}</span></h6>
+                <button (click)="offerClicked()" *ngIf="!offerClickedStatus" class="btn text-primary"><i class="fa-solid fa-tag fa-fade text-warning"></i> Offers</button>
+              </div>
+              <!-- discount coupons div-->
+              <div *ngIf="offerClickedStatus" class="text-center mb-3">
+                <!-- discount 10% -->
+                <div *ngIf="!discountClickedStatus" class="text-center">
+                  <img *ngIf="cartTotalPrice<500" (click)="discount10()" src="https://banner2.cleanpng.com/20200723/jul/transparent-discount-tag-with-10-off-discount-tag-discount-la-5f1a5d33045051.2567149715955633150177.jpg" alt="10%" width="70px">
+                  <!-- discount 50% -->
+                  <img *ngIf="cartTotalPrice>=500" (click)="discount50()" src="https://banner2.cleanpng.com/20200724/ubx/transparent-discount-tag-with-50-off-discount-tag-discount-la-5f1a5f2f782c83.2227680815955638234922.jpg" alt="50%" width="70px">
+                </div>
+              </div>
+              <!-- payment success -->
+              <div *ngIf="showSuccess" class="m-2 text-center">
+                <p class="text-success"> Transaction has been completed Successfully!. Your order has been confirmed!!. Thank you for shopping with us!!! </p>
+              </div>
+
+              <!-- payment cancel -->
+              <div *ngIf="showCancel" class="m-2 text-center">
+                <p class="text-warning"> Transaction has been Canceled!!!</p>
+              </div>
+
+              <!-- payment error -->
+              <div *ngIf="showError" class="m-2 text-center">
+                <p class="text-danger"> Transaction has been Failed!!!</p>
+              </div>
+              <!-- make payment button -->
+              <div *ngIf="proceedToPaymentBtnClickedStatus" class="d-flex justify-content-center mb-3">
+                <button *ngIf="!showPaypal" (click)="makePayment()" class="btn btn-success">Make Payment</button>
+              </div>
+              <!-- paypal code -->
+              <div *ngIf="showPaypal" class="ms-5 me-5 mb-3">
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

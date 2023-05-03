@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Fira+Sans&family=Kanit&family=Lato:wght@300&family=Nunito:wght@200&family=Roboto:wght@300&family=Rubik+Iso&family=Shantell+Sans:ital,wght@1,300&family=Tilt+Prism&family=Ubuntu&display=swap');
+
+/* font-family: 'Dancing Script', cursive;
+font-family: 'Fira Sans', sans-serif;
+font-family: 'Kanit', sans-serif;
+font-family: 'Lato', sans-serif;
+font-family: 'Nunito', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Rubik Iso', cursive;
+font-family: 'Shantell Sans', cursive;
+font-family: 'Tilt Prism', cursive;
+font-family: 'Ubuntu', sans-serif; */
+
+body{
+  font-family: 'Ubuntu', sans-serif;
+}

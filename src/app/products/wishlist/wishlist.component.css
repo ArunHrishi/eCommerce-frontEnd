@@ -1,0 +1,16 @@
+section{
+  margin-top: 55px;
+}
+.empty{
+  margin-top: 50px;
+}
+
+.cardh{
+  transition: 1s;
+}
+
+.cardh:hover{
+  transition: 1s;
+  transform: scale(1.1);
+  border: 1px solid blueviolet;
+}

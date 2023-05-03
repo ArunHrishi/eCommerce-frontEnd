@@ -1,0 +1,19 @@
+.banner{
+  background-image: url('https://pbs.twimg.com/media/DrnhFoiWoAENgyR.jpg');
+  background-size: contain;
+  background-position-y: 50px;
+  background-attachment: fixed;
+}
+
+.cardHov{
+  transition: 1s;
+}
+
+.cardHov:hover{
+  transform: scale(1.1);
+  transition: 1s;
+}
+
+.card:hover{
+  border: 1px solid rgb(48, 138, 255);
+}
